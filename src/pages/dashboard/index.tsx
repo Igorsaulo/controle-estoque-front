@@ -20,7 +20,7 @@ export function Dashboard() {
                 <Grid item xs={12}>
                     <Typography
                         fontSize={'26px'}
-                        color={'#DCB809'}
+                        color={'#ffffff'}
                     >
                         Dashboard
                     </Typography>

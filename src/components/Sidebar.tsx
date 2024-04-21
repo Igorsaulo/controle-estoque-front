@@ -52,8 +52,8 @@ export const Sidebar: React.FC = () => {
                     border={'1px solid #1D1D41'}
                 >
                     <Box padding={"56px"}>
-                        <Typography sx={{color:"#FFD50A"}} variant={'h6'}>
-                            Padaria do Zé
+                        <Typography sx={{color:"#ffffff"}} variant={'h6'}>
+                           Loja
                         </Typography>
                     </Box>
                     <Divider />
@@ -68,6 +68,11 @@ export const Sidebar: React.FC = () => {
                                         backgroundColor: '#FFDD39',
                                         borderRadius: '10px',
                                         color: '#1A1500',
+                                        '&:hover': {
+                                            backgroundColor: '#FFDD39',
+                                            borderRadius: '10px',
+                                            color: '#1A1500',
+                                        },
                                     },
                                 }}
                                 selected={index === 0}

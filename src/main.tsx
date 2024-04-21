@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Sidebar />
     <main style={{
       paddingLeft: '250px',
-      backgroundColor:"#151515"
+      backgroundColor:"#464646"
     
     }}>
       <Router />
