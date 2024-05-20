@@ -7,30 +7,21 @@ import {
     TableBody,
     styled
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const HeadCell = styled(TableCell)(({ theme }) => ({
     borderBottom: 'none',
-    color: "#e5e5e5",
-    fontSize: "16px"
+    fontSize: "16px",
 }));
 
 const BodyCell = styled(TableCell)(({ theme }) => ({
     borderBottom: 'none',
-    color: "#c9c9c9",
-    fontSize: "14px"
+    fontSize: "14px",
 }));
 
-const StickyTableHead = styled(TableHead)({
-    position: "sticky",
-    top: 0,
-    zIndex: 1,
-    backgroundColor: "#282828",
-  });
-
-
 const TableContainerStyled = styled(TableContainer)(({ theme }) => ({
+    backgroundColor:`${theme.palette.background.default}`,
     borderRadius: '10px',
-    backgroundColor: '#282828',
     height: '100%',
     width: '100%',
     overflowY: 'scroll',
@@ -45,7 +36,6 @@ const TableContainerStyled = styled(TableContainer)(({ theme }) => ({
         backgroundColor: 'transparent',
     },
 }));
-
 
 const data = [
     {
@@ -96,9 +86,18 @@ const data = [
         type: 'entrada',
         value: 'R$ 100,00'
     },
-]
+];
 
 export function OperationsTable() {
+    const theme = useTheme();
+
+    const StickyTableHead = styled(TableHead)({
+        position: "sticky",
+        top: 0,
+        zIndex: 1,
+        backgroundColor: theme.palette.secondary.light // Accessing theme inside the component
+    });
+
     return (
         <TableContainerStyled>
             <Table>
@@ -119,8 +118,8 @@ export function OperationsTable() {
                     </TableRow>
                 </StickyTableHead>
                 <TableBody>
-                    {data.map((row) => (
-                        <TableRow>
+                    {data.map((row, index) => (
+                        <TableRow key={index}>
                             <BodyCell>
                                 {row.date}
                             </BodyCell>
@@ -138,5 +137,7 @@ export function OperationsTable() {
                 </TableBody>
             </Table>
         </TableContainerStyled>
-    )
+    );
 }
+
+export default OperationsTable;

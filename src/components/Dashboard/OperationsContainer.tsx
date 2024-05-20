@@ -8,7 +8,6 @@ import { OperationsTable } from './OperationsTable';
 export function OperationsContainer() {
     return (
         <Box
-            bgcolor={'#282828'}
             height={'60vh'}
             width={'100% - 20px'}
             borderRadius={'20px'}
@@ -24,7 +23,6 @@ export function OperationsContainer() {
             >
                 <Typography
                     fontSize={'26px'}
-                    color={'#fff'}
                 >
                     Operações
                 </Typography>

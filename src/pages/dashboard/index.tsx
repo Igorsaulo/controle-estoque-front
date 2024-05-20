@@ -7,10 +7,13 @@ import { ColumnChart } from "../../components/Dashboard/ResumeChart";
 import { VolumeVendas } from "../../components/Dashboard/VolumeVendas";
 import { OperationsContainer } from "../../components/Dashboard/OperationsContainer";
 import { PageViewe } from "../../components/Dashboard/PageViewe";
+import { useTheme } from '@mui/material/styles';
 
 export function Dashboard() {
+    const theme = useTheme()
     return (
         <Box
+        bgcolor={theme.palette.background.paper}
         >
             <Grid
                 container
@@ -20,7 +23,7 @@ export function Dashboard() {
                 <Grid item xs={12}>
                     <Typography
                         fontSize={'26px'}
-                        color={'#ffffff'}
+                        color={theme.palette.primary.contrastText}
                     >
                         Dashboard
                     </Typography>
@@ -39,7 +42,7 @@ export function Dashboard() {
                                     color: '#001F20',
                                     fontSize: '30px',
                                 }} />}
-                            bgColor="#00393A"
+                            bgColor="#fff"
                             color="#0EA0A4"
                             bgColorIcon="#2BDADE"
                         />

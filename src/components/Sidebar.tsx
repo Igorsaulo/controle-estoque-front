@@ -20,10 +20,23 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import { Grid } from '@mui/material';
+import { appUseThemeContext } from '../context/themeContext';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 export const Sidebar: React.FC = () => {
+    const { toggleTheme } = appUseThemeContext();
+    const [active, setActive] = React.useState({ path: location.pathname });
+
+    const navigate = useNavigate();
+
+    const handleNavigate = (path: string) => {
+        setActive({ path });
+        navigate(path);
+        console.log(active.path, path)
+    };
+    
     return (
         <>
             <Drawer
@@ -48,11 +61,9 @@ export const Sidebar: React.FC = () => {
                     flexDirection={'column'}
                     alignItems={'center'}
                     height={'100vh'}
-                    bgcolor={'#282828'}
-                    border={'1px solid #1D1D41'}
                 >
                     <Box padding={"56px"}>
-                        <Typography sx={{color:"#ffffff"}} variant={'h6'}>
+                        <Typography variant={'h6'}>
                            Loja
                         </Typography>
                     </Box>
@@ -63,7 +74,6 @@ export const Sidebar: React.FC = () => {
                                 key={text}
                                 button
                                 sx={{
-                                    color: '#fff',
                                     '&.Mui-selected': {
                                         backgroundColor: '#FFDD39',
                                         borderRadius: '10px',
@@ -75,14 +85,15 @@ export const Sidebar: React.FC = () => {
                                         },
                                     },
                                 }}
-                                selected={index === 0}
+                                selected={active.path === `/${text.toLowerCase()}` || active.path === '/' && index === 0}
+                                onClick={() => handleNavigate(index === 0 ? '/' : `/${text.toLowerCase()}`)}
                             >
                                 <ListItemIcon>
-                                    {index === 0 && <WidgetsIcon sx={{color:'#1A1500'}} />}
-                                    {index === 1 && <AddBusinessIcon sx={{color:'#fff'}}/>}
-                                    {index === 2 && <AddTaskIcon sx={{color:'#fff'}}/>}
-                                    {index === 3 && <SettingsIcon sx={{color:'#fff'}} />}
-                                    {index === 4 && <PersonIcon sx={{color:'#fff'}} />}
+                                    {index === 0 && <WidgetsIcon />}
+                                    {index === 1 && <AddBusinessIcon/>}
+                                    {index === 2 && <AddTaskIcon/>}
+                                    {index === 3 && <SettingsIcon />}
+                                    {index === 4 && <PersonIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} />
                             </ListItem>
@@ -91,22 +102,24 @@ export const Sidebar: React.FC = () => {
                         <Divider sx={{bgcolor:"#202020"}} />
                         <ListItem>
                             <ListItemIcon>
-                                <GppGoodIcon sx={{color:"#fff"}} />
+                                <GppGoodIcon/>
                             </ListItemIcon>
-                            <ListItemText sx={{color:"#ffff"}} primary={'Support'} />
+                            <ListItemText  primary={'Support'} />
                         </ListItem>
                         <ListItem>
                             <ListItemIcon>
-                                <HelpIcon sx={{color:"#ffff"}} />
+                                <HelpIcon />
                             </ListItemIcon>
-                            <ListItemText sx={{color:"#ffff"}} primary={'Help'} />
+                            <ListItemText  primary={'Help'} />
                         </ListItem>
                         <ListItem>
                             <ListItemIcon>
-                                <DarkModeIcon sx={{color:"#ffff"}} />
+                                <DarkModeIcon  />
                             </ListItemIcon>
-                            <ListItemText sx={{color:"#ffff"}} primary={'Dark Mode'} />
-                            <Switch />
+                            <ListItemText  primary={'Dark Mode'} />
+                            <Switch
+                                onChange={toggleTheme}
+                            />
                         </ListItem>
                     </List>
                     <Grid
@@ -125,7 +138,7 @@ export const Sidebar: React.FC = () => {
                             justifyContent={'center'}
                             alignItems={'center'}
                             flexDirection={'column'}
-                            sx={{color:"#ffff"}}
+                            
                         >
                             <Typography variant={'h6'}>
                                 Username
@@ -138,7 +151,6 @@ export const Sidebar: React.FC = () => {
                             <KeyboardArrowDownIcon
                             sx={{
                                 cursor: 'pointer',
-                                color: '#ffff',
                             }} />
                         </Grid>
                     </Grid>
