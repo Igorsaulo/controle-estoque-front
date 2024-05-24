@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { login } from "../../libs/api/user/login";
 import { useAuth } from '../../libs/zustand/useAuth';
 import {Acess_token} from '../../libs/zustand/useAuth';

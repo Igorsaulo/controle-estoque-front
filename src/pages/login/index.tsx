@@ -21,7 +21,7 @@ export function Login() {
     mode: 'onBlur',
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: { email: string; password: string }) => {
     if (data) {
       mutate(data);
     }

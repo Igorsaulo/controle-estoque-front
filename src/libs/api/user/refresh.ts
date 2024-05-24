@@ -1,5 +1,8 @@
 import { api } from '..';
 
-export const refresh = async (data) => {
+export type RefreshData = {
+  refresh: string;
+};
+export const refresh = async (data : RefreshData) => {
   return await api.post('/users/refresh/', data);
 };

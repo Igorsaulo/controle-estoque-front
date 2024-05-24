@@ -1,5 +1,10 @@
 import { api } from '..';
 
-export const login = async (data) => {
+type LoginData = {
+  email: string;
+  password: string;
+};
+
+export const login = async (data : LoginData) => {
   return await api.post('/users/login/', data);
 };

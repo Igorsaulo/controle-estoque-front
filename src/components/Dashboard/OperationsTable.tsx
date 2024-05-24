@@ -95,7 +95,7 @@ export function OperationsTable() {
         position: "sticky",
         top: 0,
         zIndex: 1,
-        backgroundColor: theme.palette.secondary.light // Accessing theme inside the component
+        backgroundColor: theme.palette.background.default,
     });
 
     return (

@@ -20,7 +20,7 @@ export const useProfile = () => {
     {
       retry: false,
       onError: async (error) => {
-        if (error.response?.status === 401) {
+        if ((error as any).response?.status === 401) {
           await refreshReq();
           await refetch();
         }
