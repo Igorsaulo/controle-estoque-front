@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { getProdutos } from "../../libs/api/produto/getProdutos";
 import { useQuery } from 'react-query';
 

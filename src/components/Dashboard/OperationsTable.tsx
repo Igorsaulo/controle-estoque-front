@@ -9,12 +9,12 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-const HeadCell = styled(TableCell)(({ theme }) => ({
+const HeadCell = styled(TableCell)(() => ({
     borderBottom: 'none',
     fontSize: "16px",
 }));
 
-const BodyCell = styled(TableCell)(({ theme }) => ({
+const BodyCell = styled(TableCell)(() => ({
     borderBottom: 'none',
     fontSize: "14px",
 }));

@@ -86,7 +86,7 @@ export function TableProduto() {
     const [search, setSearch] = React.useState<string>("");
     const { isLoading, isError, isSuccess, data, refetch } = useGetProdutos({ page, search, });
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handleChangePage = (_event: unknown, newPage: number) => {
         setPage(newPage);
     };
 
