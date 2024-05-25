@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import { Button, Input, Pagination } from '@mui/material';
 import { useGetProdutos } from '../../queries/podutos/useGetProdutos';
 import { ProdutoCadastro } from './CadastroProdutoModal';
-import ProdutoTableHead   from '../atomic/table/TableHead';
+import ProdutoTableHead from '../atomic/table/TableHead';
 import TableProdutoBody from '../atomic/table/TableBody';
 
 
@@ -40,7 +40,7 @@ export function TableProduto() {
         setOpen(false);
     };
 
-    const labels = ["Nome", "Preço", "Estoque"];
+    const labels = ["Nome", "Descrição", "Preço", "Quantidade"];
 
 
     return (
@@ -48,12 +48,12 @@ export function TableProduto() {
             <TableContainer style={{ margin: "20px", padding: "20px", maxWidth: "calc(78.5vw - 20px)" }} component={Paper}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <Input placeholder="Pesquisar" value={search} onSubmit={handleSearch} onChange={handleSearch} />
-                    <Button variant='outlined' onClick={ handleClickOpen }>Cadastrar Produtos</Button>
+                    <Button variant='outlined' onClick={handleClickOpen}>Cadastrar Produtos</Button>
                 </div>
                 <Table>
                     <ProdutoTableHead labels={labels} />
                     {isLoading && <Typography>Carregando...</Typography>}
-                    {isError && <Typography>Ocorreu um erro ao carregar os produtos</Typography>}
+                    {isError  && <Typography>Ocorreu um erro ao carregar os produtos</Typography>}
                     {
                         isSuccess && data && (
                             <>
@@ -68,7 +68,6 @@ export function TableProduto() {
                         )
                     }
                 </Table>
-              
             </TableContainer>
             <ProdutoCadastro open={open} handleClose={handleClose} />
         </>

@@ -12,7 +12,7 @@ export const useGetProdutos = (queryParams?: queryParams) => {
         'getProdutos',
         () => getProdutos(queryParams),
         {
-            retry: false,
+            retry: true,
         }
     );
 

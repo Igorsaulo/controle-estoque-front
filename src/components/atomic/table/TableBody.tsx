@@ -6,9 +6,11 @@ export default function TableBodyComponent({ data }: { data: any[] }) {
             {data?.map((data) => (
                 <TableRow key={data.id}>
                     {Object.keys(data).map((key) => (
-                        <TableCell key={key}>
-                            {(data as any)[key]}
-                        </TableCell>
+                        key !== 'id' && (
+                            <TableCell key={key}>
+                                {(data as any)[key]}
+                            </TableCell>
+                        )
                     ))}
                 </TableRow>
             ))}
