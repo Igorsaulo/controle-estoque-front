@@ -8,9 +8,9 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import {  Input, Pagination } from '@mui/material';
+import { Button, FormControl, Grid, Input, Pagination } from '@mui/material';
 import { useGetProdutos } from '../../queries/podutos/useGetProdutos';
-
+import Modal from '@mui/material/Modal'; 
 type Produto = {
     id: number;
     name: string;
@@ -18,6 +18,30 @@ type Produto = {
     stock: number;
 };
 
+export default function ProdutoCadastro({ open, handleClose }: { open: boolean, handleClose: () => void }) {
+    return (
+            <Modal open={open} onClose={handleClose}>
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, backgroundColor:"#ffff", padding:"20px", borderRadius:"5px" }}>
+                    <Typography variant="h5" sx={{paddingBottom:"20px"}}>Cadastrar Produto</Typography>
+                    <FormControl fullWidth style={{ display: "flex", gap: "15px" }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={4}>
+                                <Input placeholder="Nome" />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Input placeholder="Preço" />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Input placeholder="Quantidade" />
+                            </Grid>
+                        </Grid>
+                        <Button variant="contained" style={{ marginTop: "20px" }}>Adicionar</Button>
+                    </FormControl>
+                </div>
+
+            </Modal>
+    );
+}
 
 export function TableProdutoHead() {
     return (
@@ -44,9 +68,6 @@ export function TableProdutoHead() {
 }
 
 export function TableProdutoBody({ produtos }: { produtos: Produto[] }) {
-    React.useEffect(() => {
-        console.log("produtos", produtos);
-    }, [produtos]);
     return (
         <TableBody>
             {produtos.map((produto: Produto) => (
@@ -74,17 +95,32 @@ export function TableProduto() {
         console.log("page", page);
     }, [page]);
 
-    const handleSearch = (e : React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
         setPage(1);
         page !== 1 && refetch();
         console.log("search", search);
     }
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+
     return (
         <>
             <TableContainer style={{ margin: "20px", padding: "20px", maxWidth: "calc(78.5vw - 20px)" }} component={Paper}>
-                <Input placeholder="Pesquisar" value={search} onSubmit={handleSearch} onChange={handleSearch} />
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <Input placeholder="Pesquisar" value={search} onSubmit={handleSearch} onChange={handleSearch} />
+                    <Button variant='outlined' onClick={ handleClickOpen }>Cadastrar Produtos</Button>
+                </div>
                 <Table>
                     <TableProdutoHead />
                     {isLoading && <Typography>Carregando...</Typography>}
@@ -103,7 +139,9 @@ export function TableProduto() {
                         )
                     }
                 </Table>
+              
             </TableContainer>
+            <ProdutoCadastro open={open} handleClose={handleClose} />
         </>
     );
 }
