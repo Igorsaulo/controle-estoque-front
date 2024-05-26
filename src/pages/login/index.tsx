@@ -1,31 +1,12 @@
-import { Grid, Box, Button, TextField, Typography } from "@mui/material";
-import { useLogin } from "../../queries/auth/user";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
+import { Grid, Box } from "@mui/material";
 import { useAuth } from "../../libs/zustand/useAuth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { LoginForm } from "../../components/molecule/forms/login/loginForm";
+import { RegisterForm } from "../../components/molecule/forms/login/registerForm";
 
 export function Login() {
-  const { mutate } = useLogin();
   const { access_token } = useAuth();
-
-  const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
-  });
-
-  const { register, handleSubmit } = useForm({
-    resolver: yupResolver(schema),
-    mode: 'onBlur',
-  });
-
-  const onSubmit = async (data: { email: string; password: string }) => {
-    if (data) {
-      mutate(data);
-    }
-  };
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,7 +17,7 @@ export function Login() {
     }
   }, [access_token]);
 
-
+  const [isRegister, setIsRegister] = useState(false);
 
   return (
     <Box
@@ -48,7 +29,7 @@ export function Login() {
       }}>
       <Grid container spacing={2}>
         <Grid item container display={'flex'} justifyContent={'space-between'} xs={12}>
-          <Grid item xs={6} style={{padding: '20px',}}>
+          <Grid item xs={6} style={{ padding: '20px' }}>
             <Box
               sx={{
                 display: 'flex',
@@ -62,40 +43,7 @@ export function Login() {
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100vh',
-              }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '16px',
-                  width: '60%',
-                }}
-                component={'form'}
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '16px',
-                    alignItems: 'center',
-                  }}>
-                  <Typography variant="h4">Bem vindo</Typography>
-                  <Typography variant="body1">Faça login para acessar o sistema</Typography>
-                </Box>
-                <TextField label="Email" variant="outlined" {...register('email')} />
-                <TextField label="Senha" variant="outlined" type="password" {...register('password')} />
-                <Button variant="contained" color="primary" type="submit">
-                  Entrar
-                </Button>
-              </Box>
-            </Box>
+            {isRegister ? <RegisterForm setIsRegister={setIsRegister} /> : <LoginForm setIsRegister={setIsRegister} />}
           </Grid>
         </Grid>
       </Grid>
